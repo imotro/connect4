@@ -1,0 +1,42 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+h1 {
+  margin-top: 20px;
+}
+table {
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+td {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #000;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 24px;
+  cursor: pointer;
+}
+.x {
+  color: red;
+}
+.o {
+  color: blue;
+}
+.highlight {
+  background-color: yellow;
+}
+#info {
+  display: flex;
+  justify-content: space-between;
+  width: 350px;
+  margin-top: 20px;
+}
+#winner, #processing-time {
+  font-size: 12px;
+  color:gray;
+}
