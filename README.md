@@ -7,12 +7,10 @@ Use the Minimax algorithm to predict the best connect 4 move.
 - [Minimax Algorithm](#minimax-algorithm)
   - [Overview](#overview)
   - [How Minimax Works](#how-minimax-works)
-  - [Pseudocode](#pseudocode)
 - [Connect Four Game](#connect-four-game)
   - [Features](#features)
   - [How to Play](#how-to-play)
 - [Installation](#installation)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Introduction
@@ -53,8 +51,8 @@ The Minimax algorithm is a decision-making algorithm used in two-player turn-bas
 To run the Connect Four game locally, simply clone this repository and open the `index.html` file in a web browser:
 
 ```bash
-git clone https://github.com/your_username/connect-four.git
-cd connect-four
+git clone https://github.com/imotro/connect4.git
+cd connect4
 ```
 
 ## License
