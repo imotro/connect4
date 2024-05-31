@@ -1,6 +1,6 @@
 const ROWS = 6;
 const COLUMNS = 7;
-const DEPTH = 4;
+const DEPTH = 5;
 let board = Array.from({ length: ROWS }, () => Array(COLUMNS).fill(''));
 let gameOver = false;
 
