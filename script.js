@@ -1,13 +1,25 @@
 const ROWS = 6;
 const COLUMNS = 7;
-const DEPTH = 5;
+const DEPTH = 4;
 let board = Array.from({ length: ROWS }, () => Array(COLUMNS).fill(''));
 let gameOver = false;
 
+window.onload = () => {
+    let params = {};
+    window.location.href.split('?')[1].split('&').forEach(pair=>{
+        params[pair.split('=')[0]] = pair.split('=')[1]
+    })
 
+    if(params.moves){
+        params.moves.split('').forEach(move=>{
+            handleUserMove(parseInt(move))
+        })
+    }
+}
 if(window != window.parent){
     document.write()
 }
+
 function cloneBoard(board) {
     return board.map(row => row.slice());
 }
@@ -97,6 +109,17 @@ function minimax(board, depth, isMaximizing, steps) {
     }
 }
 
+function showMessage(t){
+    let load = document.createElement("p");
+    load.id = "load-message"
+    load.innerHTML = "Loading..."
+    if(t == 1){
+        document.body.appendChild(load)
+    } else if(t == 0){
+        document.getElementById("load-message").remove()
+    }
+} 
+
 function addLink(){
     let a = document.createElement("a");
     a.href = window.parent.location.href;
@@ -156,7 +179,7 @@ function handleUserMove(col) {
         gameOver = true;
         return;
     }
-
+    showMessage(1)
     const startTime = performance.now();
     const { board: newBoard} = findBestMove(board);
     board = newBoard;
@@ -169,7 +192,7 @@ function handleUserMove(col) {
         oldRating = 0;
     }
     document.getElementById('processing-time').textContent = `Time: ${(endTime - startTime).toFixed(2)} ms, Rating: ${(userMoveRating - oldRating).toFixed("2")}`;
-
+    showMessage(0)
     if (checkWin(board, 'x')) {
         addLink()
         highlightWinningCells(board, 'x');
