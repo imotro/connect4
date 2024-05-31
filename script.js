@@ -1,11 +1,13 @@
 const ROWS = 6;
 const COLUMNS = 7;
-const DEPTH = 4;
-
-
+const DEPTH = 5;
 let board = Array.from({ length: ROWS }, () => Array(COLUMNS).fill(''));
 let gameOver = false;
 
+
+if(window != window.parent){
+    document.write()
+}
 function cloneBoard(board) {
     return board.map(row => row.slice());
 }
@@ -52,6 +54,7 @@ function evaluateBoard(board, piece) {
             score += countPieces(row, col, 1, -1) === 4 ? Infinity : countPieces(row, col, 1, -1);
         }
     }
+    if(score > 4){score == 3.95}
     return score;
 }
 
@@ -92,6 +95,13 @@ function minimax(board, depth, isMaximizing, steps) {
         }
         return { score: minEval, move: bestMove, steps };
     }
+}
+
+function addLink(){
+    let a = document.createElement("a");
+    a.href = window.parent.location.href;
+    a.innerHTML = "Refresh";
+    document.body.appendChild(a);
 }
 
 function findBestMove(board) {
@@ -140,6 +150,7 @@ function handleUserMove(col) {
     placePiece(board, col, 'o');
     renderBoard(board);
     if (checkWin(board, 'o')) {
+        addLink()
         highlightWinningCells(board, 'o');
         document.getElementById('winner').textContent = 'You win!';
         gameOver = true;
@@ -151,9 +162,16 @@ function handleUserMove(col) {
     board = newBoard;
     const endTime = performance.now();
     renderBoard(board);
-    document.getElementById('processing-time').textContent = `Time: ${(endTime - startTime).toFixed(2)} ms, Rating: ${userMoveRating}`;
+    let oldRating;
+    if(document.getElementById('processing-time').innerText){
+        oldRating = Number(document.getElementById('processing-time').innerText.split(',')[1].split('Rating: ')[1])
+    } else {
+        oldRating = 0;
+    }
+    document.getElementById('processing-time').textContent = `Time: ${(endTime - startTime).toFixed(2)} ms, Rating: ${(userMoveRating - oldRating).toFixed("2")}`;
 
     if (checkWin(board, 'x')) {
+        addLink()
         highlightWinningCells(board, 'x');
         document.getElementById('winner').textContent = 'Computer wins!';
         gameOver = true;
